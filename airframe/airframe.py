@@ -23,7 +23,7 @@ import shutil
 from version import __version__
 from flickr import Flickr
 from flashair import FlashAir
-from facebookphotos import FacebookPhotos
+#from facebookphotos import FacebookPhotos
 from PIL import Image
 
 class AirFrame(object):
