@@ -124,7 +124,7 @@ class AirFrame(object):
         if len(self.photo_tags) > 0:
             photo_filenames = self.flickr.get_tagged(self.photo_tags, self.photo_count, download_dir=self.download_dir)
         else:
-            photo_filenames = self.flickr.get_recent(self.photo_count,download_dir=self.download_dir)
+#            photo_filenames = self.flickr.get_recent(self.photo_count,download_dir=self.download_dir)
             photo_filenames = self.facebookphotos.get_recent(self.photo_count,download_dir=self.download_dir)
         return photo_filenames
 
