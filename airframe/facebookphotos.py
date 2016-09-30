@@ -19,7 +19,7 @@ import sys, os
 import logging
 
 import yaml
-import facebook
+#import facebook
 import urllib
 import urlparse
 from operator import itemgetter
