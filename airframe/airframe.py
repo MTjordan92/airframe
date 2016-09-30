@@ -126,7 +126,7 @@ class AirFrame(object):
         else:
             photo_filenames = self.flickr.get_recent(self.photo_count,download_dir=self.download_dir)
             photo_filenames = self.facebookphotos.get_recent(self.photo_count,download_dir=self.download_dir)
-       return photo_filenames
+        return photo_filenames
 
     def local_dir_mode(self):
         # Copy all the files in the named directory to the cache (download_dir).
@@ -165,7 +165,7 @@ class AirFrame(object):
 
         if self.local_dir:
             photo_filenames = self.local_dir_mode()
-       elif self.facebook:
+        elif self.facebook:
             photo_filenames = self.facebook_mode()
         else:
             photo_filenames = self.flickr_mode()
