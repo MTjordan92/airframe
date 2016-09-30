@@ -23,7 +23,7 @@ import shutil
 from version import __version__
 from flickr import Flickr
 from flashair import FlashAir
-#from facebookphotos import FacebookPhotos
+from facebookphotos import FacebookPhotos
 from PIL import Image
 
 class AirFrame(object):
@@ -57,11 +57,11 @@ class AirFrame(object):
                 epilog = "AirFrame version %s (Copyright 2014 Virantha Ekanayake)" % __version__,
                 )
                 
-#        p.add_argument('-b', '--facebook', action='store_true',
-#            default=False, help='Upload pictures from Flickr to Flashair')
+     p.add_argument('-b', '--facebook', action='store_true',
+           default=False, help='Upload pictures from Flickr to Flashair')
 
-#        p.add_argument('-r', '--flickr', action='store_true',
-#            default=True, help='Upload pictures from Facebook to Flashair (default)')
+       p.add_argument('-r', '--flickr', action='store_true',
+           default=True, help='Upload pictures from Facebook to Flashair (default)')
 
         p.add_argument('-l', '--local-dir', type=str,
             help='Upload all .jpg files from this directory instead of Flickr or Facebook')
@@ -98,8 +98,8 @@ class AirFrame(object):
         self.flashair_ip = args.flashair_ip
         self.local_dir = args.local_dir
         self.resize = args.resize
- #       self.facebook = args.facebook
- #       self.flickr = args.flickr
+        self.facebook = args.facebook
+        self.flickr = args.flickr
 
         if self.debug:
             logging.basicConfig(level=logging.DEBUG, format='%(message)s')
@@ -117,16 +117,16 @@ class AirFrame(object):
             photo_filenames = self.flickr.get_recent(self.photo_count,download_dir=self.download_dir)
         return photo_filenames
 
- #   def facebook_mode(self):
+    def facebook_mode(self):
         # Connect to Facebook
- #       logging.debug("list of tags: %s" % self.photo_tags)
- #       self.facebookphotos = FacebookPhotos()
-#        if len(self.photo_tags) > 0:
-#            photo_filenames = self.flickr.get_tagged(self.photo_tags, self.photo_count, download_dir=self.download_dir)
-#        else:
-#            photo_filenames = self.flickr.get_recent(self.photo_count,download_dir=self.download_dir)
-#        photo_filenames = self.facebookphotos.get_recent(self.photo_count,download_dir=self.download_dir)
- #       return photo_filenames
+        logging.debug("list of tags: %s" % self.photo_tags)
+        self.facebookphotos = FacebookPhotos()
+        if len(self.photo_tags) > 0:
+            photo_filenames = self.flickr.get_tagged(self.photo_tags, self.photo_count, download_dir=self.download_dir)
+        else:
+            photo_filenames = self.flickr.get_recent(self.photo_count,download_dir=self.download_dir)
+            photo_filenames = self.facebookphotos.get_recent(self.photo_count,download_dir=self.download_dir)
+       return photo_filenames
 
     def local_dir_mode(self):
         # Copy all the files in the named directory to the cache (download_dir).
@@ -165,8 +165,8 @@ class AirFrame(object):
 
         if self.local_dir:
             photo_filenames = self.local_dir_mode()
-  #      elif self.facebook:
-  #          photo_filenames = self.facebook_mode()
+       elif self.facebook:
+            photo_filenames = self.facebook_mode()
         else:
             photo_filenames = self.flickr_mode()
 
